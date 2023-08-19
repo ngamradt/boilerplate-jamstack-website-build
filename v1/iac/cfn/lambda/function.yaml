@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "Create a Lambda Function - (v1.0.0)"
+Description: "Create an 11ty Build Lambda Function - (v1.0.0)"
 Parameters:
   # General Configuration
   InfrastructureName:
@@ -30,10 +30,6 @@ Parameters:
     Type: "String"
     Description: "This version number that we want to give the current Lambda code."
     Default: "1.0.0"
-  ProvisionedConcurrentExecutions:
-    Type: "Number"
-    Description: "Provision/initialize a requested number of execution environments that are prepared to respond to your function's invocations."
-    Default: 1
   GitCommit:
     Type: "String"
     Description: "This is the git commit hash."
@@ -78,7 +74,7 @@ Resources:
             Action:
             - "codepipeline:PutJobSuccessResult"
             - "codepipeline:PutJobFailureResult"
-      # The following S3 permissions should be cleaned up to be more restrictive.
+      # TODO: The following S3 permissions should be cleaned up to target the specific bucket.
       ManagedPolicyArns:
       - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
       Tags:
@@ -255,7 +251,6 @@ Metadata:
       - Name
       - Handler
       - Version
-      - ProvisionedConcurrentExecutions
       - GitCommit
       - S3Bucket
       - S3Key
@@ -276,8 +271,6 @@ Metadata:
         default: "Handler:"
       Version:
         default: "Version:"
-      ProvisionedConcurrentExecutions:
-        default: "Provisioned Concurrent Executions:"
       GitCommit:
         default: "Git Commit:"
       S3Bucket:
