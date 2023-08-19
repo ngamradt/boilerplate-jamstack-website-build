@@ -10,6 +10,7 @@ This directory holds the source code and CloudFormation templates for deploying 
 
 - [Directory Structure](#directory-structure)
 - [Installation](#installation)
+- [Function Details](#function-details)
 - [TODO Items](#todo-items)
 
 ---
@@ -51,6 +52,23 @@ Since [one of the goals](https://nealgamradt.com/posts/2023/06/blog-on-a-budget-
 The use of the "polymorphic" CodePipeline is mainly there to save money.  CodePipelines are not that expensive, so admittedly this is being really cheap.  This is probably not great practice unless you are really trying to save money.  That being said, it does work, and generally works rather well as long as you know when and why to enable the different flags to switch the CodePipeline to a different state.
 
 ---
+
+# Function Details
+
+This function does the following:
+
+1. It downloads the input artifact ZIP file from the S3 bucket for the CodePipeline stage.
+2. It extracts the ZIP file to the local `/tmp/` directory of the Lambda.
+    - **NOTE:** This directory has a 512MB limit, so do keep that in mind.
+    - Even with this size limit and even if articles are large, this should likely allow for thousands of posts before this size limit becomes an issue.
+3. Depending on the mode passed into the Lambda, the next step does one of the following:
+    - Builds the 11ty blog post HTML files.
+    - Does a copy of some of the supporting files, such as CSS and JavaScript, for the site.
+4. The resulting files of either of the modes in step #3 are then zipped into a single ZIP file.
+5. The ZIP file is uploaded to the correct output location for the CodePipeline stage.
+6. The function then reports success or failure back to the CodePipeline.
+7. If failure is reported back, then the CodePipeline stage will fail.
+8. If success is reported back, then the CodePipeline will move to the next stage.
 
 # TODO Items
 
