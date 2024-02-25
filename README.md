@@ -6,10 +6,8 @@ Eleventy has a focus on slow and steady development which helps with the stabili
 
 There is a related blog post regarding [why I chose 11ty](https://nealgamradt.com/posts/2023/07/choosing-a-jamstack/index.html) for my blog.
 
----
-**NOTE**
-
-It is recommended that this repository not be used directly, the "Use this template" button should be utilized to create your own copy of this repository.  This will allow you to make modifications to this Lambda and CloudFormation template as you need them.  When there are enhancements to the source repository, you can always pull them in as needed.
+> [!IMPORTANT]
+> It is recommended that this repository not be used directly, the "Use this template" button should be utilized to create your own copy of this repository.  This will allow you to make modifications to this Lambda and CloudFormation template as you need them.  When there are enhancements to the source repository, you can always pull them in as needed.
 
 ---
 

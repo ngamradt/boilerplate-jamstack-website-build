@@ -46,12 +46,8 @@ Though it should be possible to deploy the [CloudFormation template](iac/cfn/lam
 
 Since [one of the goals](https://nealgamradt.com/posts/2023/06/blog-on-a-budget-goals-and-requirements/index.html) is to keep things affordable for this whole project, instead of having multiple CodePipelines for deploying this function and building the 11ty site, it was decided to create one "polymorphic" CodePipeline that can change its stages based on some flags that are either enabled or disabled.  This allows for the use of one ([free tier](https://aws.amazon.com/free/)) CodePipeline that we can use to do all the different functions that we need.
 
----
-**NOTE**
-
-The use of the "polymorphic" CodePipeline is mainly there to save money.  CodePipelines are not that expensive, so admittedly this is being really cheap.  This is probably not great practice unless you are really trying to save money.  That being said, it does work, and generally works rather well as long as you know when and why to enable the different flags to switch the CodePipeline to a different state.
-
----
+> [!NOTE]
+> The use of the "polymorphic" CodePipeline is mainly there to save money.  CodePipelines are not that expensive, so admittedly this is being really cheap.  This is probably not great practice unless you are really trying to save money.  That being said, it does work, and generally works rather well as long as you know when and why to enable the different flags to switch the CodePipeline to a different state.
 
 # Function Details
 
